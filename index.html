@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- jQuery библиотека -->
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="js/fb/jquery.fancybox.css">
+    <!-- Fancybox JS -->
+    <script src="js/fb/jquery.fancybox.js"></script>
+</head>
+<body>
+    
+
+<a href="https://source.unsplash.com/1600x900/?nature,water" data-fancybox="images_sert" data-caption="My caption 1">
+<img src="https://source.unsplash.com/1600x900/?nature,water" alt="" width="150">
+
+    </a>
+
+
+    <script>
+        
+    $().fancybox({
+        selector: '[data-fancybox="images_sert"]',
+        thumbs: {
+            autoStart: true,
+        },
+        buttons: [
+            "close"
+        ],
+        keyboard: true,
+        hash: false,
+        transitionEffect: "zoom-in-out",
+        loop: true,
+    });
+</script>
+</body>
+</html>
