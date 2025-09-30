@@ -1,40 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- jQuery библиотека -->
-    <script src="js/jquery-3.7.1.min.js"></script>
-    <!-- Fancybox CSS -->
-    <link rel="stylesheet" href="js/fb/jquery.fancybox.css">
-    <!-- Fancybox JS -->
-    <script src="js/fb/jquery.fancybox.js"></script>
+    <title>Slick Carousel Demo</title>
+    
+    <!-- Подключение Slick CSS -->
+    <link rel="stylesheet" href="js/slick/slick.css">
+    
+    <!-- Дополнительные стили для карусели -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .carousel {
+            margin: 20px 0;
+        }
+        
+        .slide {
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            margin: 0 10px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .slide h3 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+        }
+        
+        .slide p {
+            margin: 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        /* Кастомизация стрелок Slick */
+        .slick-prev, .slick-next {
+            z-index: 1;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .slick-prev {
+            left: -50px;
+        }
+        
+        .slick-next {
+            right: -50px;
+        }
+        
+        .slick-prev:before, .slick-next:before {
+            font-size: 30px;
+            color: #333;
+        }
+        
+        /* Кастомизация точек */
+        .slick-dots {
+            bottom: -50px;
+        }
+        
+        .slick-dots li button:before {
+            font-size: 12px;
+            color: #333;
+        }
+        
+        .slick-dots li.slick-active button:before {
+            color: #667eea;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .slick-prev {
+                left: -30px;
+            }
+            
+            .slick-next {
+                right: -30px;
+            }
+            
+            .slide {
+                margin: 0 5px;
+            }
+        }
+    </style>
 </head>
 <body>
-    
-
-<a href="https://source.unsplash.com/1600x900/?nature,water" data-fancybox="images_sert" data-caption="My caption 1">
-<img src="https://source.unsplash.com/1600x900/?nature,water" alt="" width="150">
-
-    </a>
-
-
-    <script>
+    <div class="container">
+        <h1>Простая карусель на Slick</h1>
         
-    $().fancybox({
-        selector: '[data-fancybox="images_sert"]',
-        thumbs: {
-            autoStart: true,
-        },
-        buttons: [
-            "close"
-        ],
-        keyboard: true,
-        hash: false,
-        transitionEffect: "zoom-in-out",
-        loop: true,
-    });
-</script>
+        <div class="carousel">
+            <div class="slide">
+                <h3>Слайд 1</h3>
+                <p>Первый слайд нашей карусели с красивым градиентом</p>
+            </div>
+            
+            <div class="slide">
+                <h3>Слайд 2</h3>
+                <p>Второй слайд с другим содержимым</p>
+            </div>
+            
+            <div class="slide">
+                <h3>Слайд 3</h3>
+                <p>Третий слайд карусели</p>
+            </div>
+            
+            <div class="slide">
+                <h3>Слайд 4</h3>
+                <p>Четвертый слайд для демонстрации</p>
+            </div>
+            
+            <div class="slide">
+                <h3>Слайд 5</h3>
+                <p>Пятый и последний слайд</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение jQuery (необходимо для Slick) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Подключение Slick JS -->
+    <script src="js/slick/slick.js"></script>
+    
+    <!-- Инициализация карусели -->
+    <script>
+        $(document).ready(function(){
+            $('.carousel').slick({
+                dots: true,              // Показать точки навигации
+                infinite: true,          // Бесконечная прокрутка
+                speed: 300,              // Скорость анимации
+                slidesToShow: 3,         // Количество видимых слайдов
+                slidesToScroll: 1,       // Количество слайдов при прокрутке
+                autoplay: true,          // Автоматическая прокрутка
+                autoplaySpeed: 3000,     // Скорость автопрокрутки (3 секунды)
+                arrows: true,            // Показать стрелки
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
 </body>
 </html>
