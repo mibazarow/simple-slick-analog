@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slick Carousel Demo</title>
+    <title>VanillaSlick Carousel Demo</title>
     
-    <!-- Подключение Slick CSS -->
-    <link rel="stylesheet" href="js/slick/slick.css">
+    <!-- Подключение VanillaSlick CSS -->
+    <link rel="stylesheet" href="js/vanilla-slick.css">
     
     <!-- Дополнительные стили для карусели -->
     <style>
@@ -61,47 +61,41 @@
             opacity: 0.9;
         }
         
-        /* Кастомизация стрелок Slick */
-        .slick-prev, .slick-next {
+        /* Кастомизация стрелок VanillaSlick */
+        .vanilla-slick-prev, .vanilla-slick-next {
             z-index: 1;
             width: 40px;
             height: 40px;
         }
         
-        .slick-prev {
+        .vanilla-slick-prev {
             left: -50px;
         }
         
-        .slick-next {
+        .vanilla-slick-next {
             right: -50px;
         }
         
-        .slick-prev:before, .slick-next:before {
-            font-size: 30px;
-            color: #333;
-        }
-        
         /* Кастомизация точек */
-        .slick-dots {
+        .vanilla-slick-dots {
             bottom: -50px;
         }
         
-        .slick-dots li button:before {
+        .vanilla-slick-dots li button {
             font-size: 12px;
-            color: #333;
         }
         
-        .slick-dots li.slick-active button:before {
-            color: #667eea;
+        .vanilla-slick-dots li.vanilla-slick-active button {
+            background: #667eea !important;
         }
         
         /* Адаптивность */
         @media (max-width: 768px) {
-            .slick-prev {
+            .vanilla-slick-prev {
                 left: -30px;
             }
             
-            .slick-next {
+            .vanilla-slick-next {
                 right: -30px;
             }
             
@@ -113,7 +107,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Простая карусель на Slick</h1>
+        <h1>Простая карусель на VanillaSlick (без jQuery)</h1>
         
         <div class="carousel">
             <div class="slide">
@@ -143,16 +137,14 @@
         </div>
     </div>
 
-    <!-- Подключение jQuery (необходимо для Slick) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Подключение VanillaSlick JS (чистый JavaScript, без зависимостей) -->
+    <script src="js/vanilla-slick.js"></script>
     
-    <!-- Подключение Slick JS -->
-    <script src="js/slick/slick.js"></script>
-    
-    <!-- Инициализация карусели -->
+    <!-- Инициализация карусели на чистом JavaScript -->
     <script>
-        $(document).ready(function(){
-            $('.carousel').slick({
+        document.addEventListener('DOMContentLoaded', function() {
+            // Создаем экземпляр VanillaSlick с теми же настройками
+            const carousel = new VanillaSlick('.carousel', {
                 dots: true,              // Показать точки навигации
                 infinite: true,          // Бесконечная прокрутка
                 speed: 300,              // Скорость анимации
@@ -178,6 +170,10 @@
                     }
                 ]
             });
+            
+            // Добавляем карусель в глобальную область для отладки
+            window.myCarousel = carousel;
+            console.log('VanillaSlick карусель инициализирована!');
         });
     </script>
 </body>
