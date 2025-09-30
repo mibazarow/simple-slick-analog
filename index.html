@@ -66,14 +66,27 @@
             z-index: 1;
             width: 40px;
             height: 40px;
+            background: #333 !important;
+            border-radius: 50% !important;
+            border: 2px solid #fff !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
         }
         
         .vanilla-slick-prev {
-            left: -50px;
+            left: 10px;
         }
         
         .vanilla-slick-next {
-            right: -50px;
+            right: 10px;
+        }
+        
+        .vanilla-slick-prev svg, .vanilla-slick-next svg {
+            color: white !important;
+        }
+        
+        .vanilla-slick-prev:hover, .vanilla-slick-next:hover {
+            background: #000 !important;
+            transform: translateY(-50%) scale(1.05) !important;
         }
         
         /* Кастомизация точек */
@@ -92,15 +105,43 @@
         /* Адаптивность */
         @media (max-width: 768px) {
             .vanilla-slick-prev {
-                left: -30px;
+                left: 5px;
+                width: 35px;
+                height: 35px;
             }
             
             .vanilla-slick-next {
-                right: -30px;
+                right: 5px;
+                width: 35px;
+                height: 35px;
+            }
+            
+            .vanilla-slick-prev svg, .vanilla-slick-next svg {
+                width: 16px !important;
+                height: 16px !important;
             }
             
             .slide {
                 margin: 0 5px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .vanilla-slick-prev {
+                left: 5px;
+                width: 32px;
+                height: 32px;
+            }
+            
+            .vanilla-slick-next {
+                right: 5px;
+                width: 32px;
+                height: 32px;
+            }
+            
+            .vanilla-slick-prev svg, .vanilla-slick-next svg {
+                width: 14px !important;
+                height: 14px !important;
             }
         }
     </style>

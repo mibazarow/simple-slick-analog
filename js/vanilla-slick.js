@@ -169,17 +169,27 @@ class VanillaSlick {
 
     updateSlideWidth() {
         const containerWidth = this.container.offsetWidth;
-        this.slideWidth = containerWidth / this.settings.slidesToShow;
+        
+        // Получаем стили первого слайда для расчета margin
+        const firstSlide = this.slides[0];
+        const slideStyle = window.getComputedStyle(firstSlide);
+        const marginLeft = parseFloat(slideStyle.marginLeft) || 0;
+        const marginRight = parseFloat(slideStyle.marginRight) || 0;
+        const totalMargin = marginLeft + marginRight;
+        
+        // Вычисляем ширину слайда с учетом margin
+        this.slideWidth = (containerWidth - (totalMargin * this.settings.slidesToShow)) / this.settings.slidesToShow;
         
         // Применяем ширину к слайдам
         const allSlides = this.track.children;
         for (let slide of allSlides) {
             slide.style.width = `${this.slideWidth}px`;
             slide.style.float = 'left';
+            slide.style.boxSizing = 'border-box';
         }
         
-        // Устанавливаем ширину трека
-        const totalWidth = this.slideWidth * allSlides.length;
+        // Устанавливаем ширину трека с учетом margin
+        const totalWidth = (this.slideWidth + totalMargin) * allSlides.length;
         this.track.style.width = `${totalWidth}px`;
         this.track.style.position = 'relative';
         this.track.style.transition = `transform ${this.settings.speed}ms ease`;
@@ -258,14 +268,21 @@ class VanillaSlick {
         this.isAnimating = animate;
         this.currentSlide = slideIndex;
         
+        // Получаем margin для правильного расчета позиции
+        const firstSlide = this.slides[0];
+        const slideStyle = window.getComputedStyle(firstSlide);
+        const marginLeft = parseFloat(slideStyle.marginLeft) || 0;
+        const marginRight = parseFloat(slideStyle.marginRight) || 0;
+        const totalMargin = marginLeft + marginRight;
+        
         // Вычисляем позицию для трансформации
         let translateX = 0;
         
         if (this.settings.infinite) {
             const offset = this.settings.slidesToShow; // Смещение для клонированных слайдов
-            translateX = -(slideIndex + offset) * this.slideWidth;
+            translateX = -(slideIndex + offset) * (this.slideWidth + totalMargin);
         } else {
-            translateX = -slideIndex * this.slideWidth;
+            translateX = -slideIndex * (this.slideWidth + totalMargin);
         }
         
         // Применяем трансформацию
@@ -296,11 +313,18 @@ class VanillaSlick {
         
         const offset = this.settings.slidesToShow;
         
+        // Получаем margin для правильного расчета позиции
+        const firstSlide = this.slides[0];
+        const slideStyle = window.getComputedStyle(firstSlide);
+        const marginLeft = parseFloat(slideStyle.marginLeft) || 0;
+        const marginRight = parseFloat(slideStyle.marginRight) || 0;
+        const totalMargin = marginLeft + marginRight;
+        
         // Если мы в конце клонированных слайдов, перемещаемся к оригиналам
         if (this.currentSlide >= this.slideCount) {
             this.currentSlide = this.currentSlide - this.slideCount;
             this.track.style.transition = 'none';
-            const translateX = -(this.currentSlide + offset) * this.slideWidth;
+            const translateX = -(this.currentSlide + offset) * (this.slideWidth + totalMargin);
             this.track.style.transform = `translateX(${translateX}px)`;
         }
         
@@ -308,7 +332,7 @@ class VanillaSlick {
         if (this.currentSlide < 0) {
             this.currentSlide = this.slideCount + this.currentSlide;
             this.track.style.transition = 'none';
-            const translateX = -(this.currentSlide + offset) * this.slideWidth;
+            const translateX = -(this.currentSlide + offset) * (this.slideWidth + totalMargin);
             this.track.style.transform = `translateX(${translateX}px)`;
         }
     }
